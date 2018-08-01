@@ -45,25 +45,25 @@ struct RandGenerator<DistributionT, GeneratorT, 3> {
   }
 };
 
-template <class CoordT, class ResultT, std::size_t NDim>
+template <class CoordT, std::size_t NDim>
 struct MortonEncoder {
   static_assert(
       dependent_false<CoordT>::value,
       "Only up to 3 dimensions are supported");
 };
 
-template <class CoordT, class ResultT>
-struct MortonEncoder<CoordT, ResultT, 2> {
-  ResultT operator()(std::array<CoordT, 2> point)
+template <class CoordT>
+struct MortonEncoder<CoordT, 2> {
+  uint64_t operator()(std::array<CoordT, 2> point)
   {
     return libmorton::morton2D_64_encode(
         std::get<1>(point), std::get<0>(point));
   }
 };
 
-template <class CoordT, class ResultT>
-struct MortonEncoder<CoordT, ResultT, 3> {
-  ResultT operator()(std::array<CoordT, 3> point)
+template <class CoordT>
+struct MortonEncoder<CoordT, 3> {
+  uint64_t operator()(std::array<CoordT, 3> point)
   {
     return libmorton::morton2D_64_encode(
         std::get<1>(point), std::get<0>(point));
@@ -75,7 +75,7 @@ struct MortonEncoder<CoordT, ResultT, 3> {
 template <class coord_t, size_t NDim>
 static uint64_t transpose_to_hilbert_integer(std::array<coord_t, NDim> array)
 {
-  return detail::MortonEncoder<coord_t, uint64_t, NDim>{}(array);
+  return detail::MortonEncoder<coord_t, NDim>{}(array);
 }
 
 template <class coord_t, std::size_t HilbertOrder, std::size_t NDim>
