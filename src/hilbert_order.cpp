@@ -31,15 +31,15 @@ void rand_points(Iter begin, Iter end)
 
 int main()
 {
-  constexpr size_t const NDim = 2;
+  constexpr size_t const NDim = 3;
   // We have 3 dimensions, so we can combine max 3*21 Bits into a single 64
-  // Bit integer
-  constexpr size_t const HilbertOrder = 4;  // max = 21
+// Bit integer
+constexpr size_t const HilbertOrder = 2;  // max = 21
 
   using coord_t = uint32_t;
   using point_t = std::array<coord_t, NDim>;
 
-  constexpr const size_t npoints = 20;
+  constexpr const size_t npoints = 64;
 
   static_assert(
       npoints <= (1 << (NDim * HilbertOrder)),

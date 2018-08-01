@@ -34,8 +34,8 @@ template <class CoordT>
 struct MortonEncoder<CoordT, 3> {
   uint64_t operator()(std::array<CoordT, 3> point)
   {
-    return libmorton::morton2D_64_encode(
-        std::get<1>(point), std::get<0>(point));
+    return libmorton::morton3D_64_encode(
+        std::get<2>(point), std::get<1>(point), std::get<0>(point));
   }
 };
 
