@@ -1,6 +1,7 @@
 #ifndef HILBERT_SORT__HILBERT_H__INCLUDED
 #define HILBERT_SORT__HILBERT_H__INCLUDED
 
+#include <cassert>
 #include <algorithm>
 #include <array>
 #include <cstdlib>
